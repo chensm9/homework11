@@ -1,0 +1,49 @@
+html,body{  
+  height: 100%;  
+}
+
+body {
+  background: url(/images/details_back.jpg);
+  background-repeat: no-repeat; 
+  background-size:100% 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+div#details {
+  background-color:#6495ED;
+  width: 25%;
+  height: 40%;
+  margin: auto;
+  opacity: 0.5;
+  padding: 5%;
+  border-radius: 100%;
+}
+
+h2 {
+  margin-top: 5%;
+  text-align: center;
+  color: white;
+}
+
+div.info {
+  margin-top: 3%;
+  text-align: center;
+  height: 15%;
+  color: white;
+  font-size: 17pt;
+}
+
+span {
+  display: inline-block;
+  width: 30%;
+  margin-left: 8%;
+}
+
+div#username, div#id,
+div#phone, div#mail {
+  display: inline-block;
+  width: 60%;
+}
