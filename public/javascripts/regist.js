@@ -1,5 +1,3 @@
-var timeout;
-
 window.onload = function() {
   $('#reset').click(function() {
     $('input').val('');
@@ -104,6 +102,7 @@ function validMail(mail) {
   return true;
 }
 
+var timeout;
 function TIP(message) {
   clearTimeout(timeout);
   $("#tip").text(message);
