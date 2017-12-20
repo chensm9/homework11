@@ -12,4 +12,8 @@ router.get('/', function(req, res, next) {
   rs.pipe(res);
 });
 
+router.post('/', function(req, res, next) {
+  res.end("登录失败");
+});
+
 module.exports = router;

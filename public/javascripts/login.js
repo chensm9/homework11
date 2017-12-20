@@ -14,8 +14,6 @@ window.onload = function() {
       TIP("请填写密码");
       return;
     } else {
-      alert($('#username').val());
-      alert($('#passwd').val());
       $.ajax({
         url: "/",
         method: "POST",
