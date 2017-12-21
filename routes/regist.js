@@ -41,21 +41,18 @@ function ifUnique (user, callback) {
     .then(data =>  {
       if (data != "") {
         callback("该用户名已经存在");
-        reject("break");
       } else { 
         return db.users.find({'sid': user.sid});
       }
   }).then(data => {
       if (data != "") {
         callback("该学号已经存在");
-        reject("break");
       } else {
         return db.users.find({'phone': user.phone});
       }
   }).then(data => {
       if (data != "") {
         callback("该电话号码已经存在");
-        reject("break");
       } else {
         return db.users.find({'mail': user.mail});
       }
