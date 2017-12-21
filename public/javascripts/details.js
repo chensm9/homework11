@@ -14,4 +14,7 @@ window.onload = function () {
       $("#mail").text(user.mail);
     }
   });
+  $("button").click(function(){
+    window.location = '/';
+  })
 }

@@ -7,12 +7,10 @@ var path = require('path'),
 var db = require('../database/db');
 
 router.post('/', function(req, res, next) {
-  console.log(req.body.username);
   var user = { 
     username: req.body.username 
   };
   db.users.find(user).then(data =>  {
-    console.log(data);
     if (data == "") {
       res.redirect("/");
     } else { 
