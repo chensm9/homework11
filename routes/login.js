@@ -9,11 +9,14 @@ var db = require('../database/db');
 router.get('/', function(req, res, next) {
   var file;
   if (req.url == '/') {
+    if(req.cookies.user != undefined){
+      return res.redirect(('?username=' + req.cookies.user.username));
+    }
     file = './views/login.html';
   } else if (req.url.match(/\?username=.*/)) {
     file = './views/details.html';
   } else {
-    res.redirect('/');
+    return res.redirect('/');
   }
   res.writeHead(200, {'Content-Type': mime.lookup(path.extname(file))});
   var rs = fs.createReadStream(file);
@@ -29,6 +32,8 @@ router.post('/', function(req, res, next) {
     if (data == "") {
       res.end("错误的用户名或者密码");
     } else { 
+      res.cookie("user", {username: req.body.username},
+                 {maxAge: 600000 , httpOnly: false});
       res.end("登录成功");
     }
   });

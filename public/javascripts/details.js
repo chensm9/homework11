@@ -15,6 +15,11 @@ window.onload = function () {
     }
   });
   $("button").click(function(){
-    window.location = '/';
+    $.ajax({
+      url: "/logout",
+      success: function(){
+        window.location = '/';
+      }
+    });
   })
 }
