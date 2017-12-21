@@ -14,6 +14,12 @@ router.get('/', function(req, res, next) {
     }
     file = './views/login.html';
   } else if (req.url.match(/\?username=.*/)) {
+    if(req.cookies.user != undefined) {
+      if (req.cookies.user.username != req.url.substr(11))
+      return res.redirect(('?username=' + req.cookies.user.username));
+    } else {
+      return res.redirect('/');
+    }
     file = './views/details.html';
   } else {
     return res.redirect('/');

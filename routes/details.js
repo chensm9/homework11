@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
   };
   db.users.find(user).then(data =>  {
     if (data == "") {
-      res.redirect("/");
+      return res.redirect("/");
     } else { 
       res.end(JSON.stringify(data[0]));
     }
