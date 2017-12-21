@@ -1,18 +1,15 @@
 window.onload = function () {
   var search = window.location.href.match(/username=.*/);
   $.ajax({
-    url: "/info",
+    url: "/details",
     method: "POST",
     data: {
-      information: search[0]
+      username: search[0].substr(9)
     },
     success: function(data) {
-      if (data == "no such user") {
-        window.location.href = "/";
-      }
       var user = JSON.parse(data);
       $("#username").text(user.username);
-      $("#id").text(user.id);
+      $("#id").text(user.sid);
       $("#phone").text(user.phone);
       $("#mail").text(user.mail);
     }
