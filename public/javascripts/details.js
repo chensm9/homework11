@@ -7,11 +7,14 @@ window.onload = function () {
       username: search[0].substr(9)
     },
     success: function(data) {
-      var user = JSON.parse(data);
-      $("#username").text(user.username);
-      $("#id").text(user.sid);
-      $("#phone").text(user.phone);
-      $("#mail").text(user.mail);
+      var data = JSON.parse(data);
+      $("#username").text(data.user.username);
+      $("#id").text(data.user.sid);
+      $("#phone").text(data.user.phone);
+      $("#mail").text(data.user.mail);
+      if (data.message != "") {
+        TIP(data.message);
+      }
     }
   });
   $("button").click(function(){
@@ -22,4 +25,11 @@ window.onload = function () {
       }
     });
   })
+}
+
+function TIP(message) {
+  $("#tip").text(message);
+  $('#tip').removeClass("clear");
+  var timeout = 
+    setTimeout('$("#tip").text(""); $("#tip").addClass("clear");',3000);
 }

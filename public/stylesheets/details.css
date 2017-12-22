@@ -8,10 +8,6 @@ body {
   background-size:100% 100%;
 }
 
-h1 {
-  text-align: center;
-}
-
 div#details {
   background-color:#6495ED;
   width: 25%;
@@ -54,4 +50,19 @@ button {
   margin-left: 65%;
   font-size: 16pt;
   background-color: lightseagreen;
+}
+
+div#tip {
+  background-color: none;
+  margin-top: 5%;
+  height: 10%;
+  font-size: 15pt;
+  font-weight: bold;
+  text-align: center;
+  color: red;
+  transition: 0.4s;
+}
+
+.clear {
+  opacity: 0;
 }

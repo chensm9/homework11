@@ -10,11 +10,20 @@ router.post('/', function(req, res, next) {
   var user = { 
     username: req.body.username 
   };
+  var isvalid = true;
+  if (req.cookies.user.username != req.body.username) {
+    user.username = req.cookies.user.username;
+    isvalid = false;
+  }
   db.users.find(user).then(data =>  {
     if (data == "") {
       return res.redirect("/");
     } else { 
-      res.end(JSON.stringify(data[0]));
+      var message = "";
+      if (!isvalid) {
+        message = "只能够访问自己的数据";
+      }
+      res.end(JSON.stringify({user: data[0], message: message}));
     }
   });
 });

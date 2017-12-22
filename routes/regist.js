@@ -4,7 +4,8 @@ var path = require('path'),
     fs = require('fs'),
     querystring = require("querystring"),
     mime = require("mime");
-var db = require('../database/db');
+var db = require('../database/db'),
+    encrypt = require('../database/encrypt');
 
 router.get('/', function(req, res) {
   file = './views/regist.html'
@@ -19,18 +20,22 @@ router.post('/', function(req, res) {
     sid: req.body.sid ,
     phone: req.body.phone,
     mail: req.body.mail,
-    passwd: req.body.passwd
+    passwd: encrypt.md5(req.body.passwd)
   };
 
   ifUnique(user, function(message) {
     if (message == "注册成功") {
       var userInsert = new db.users(user);
-      userInsert.save(function(err, res){
-        if(err)
+      userInsert.save(function(err, res) {
+        if(err) {
           console.log("插入数据失败， error: " + err);
-        else
+        }
+        else {
           console.log('成功插入数据: \n' + res);
+        }
       });
+      res.cookie("user", {username: req.body.username},
+                 {maxAge: 1800000 , httpOnly: false});
     }
     res.end(message);
   });

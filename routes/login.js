@@ -4,7 +4,9 @@ var path = require('path'),
     fs = require('fs'),
     querystring = require("querystring"),
     mime = require("mime");
-var db = require('../database/db');
+var db = require('../database/db'),
+    encrypt = require('../database/encrypt');
+
 
 router.get('/', function(req, res, next) {
   var file;
@@ -14,10 +16,7 @@ router.get('/', function(req, res, next) {
     }
     file = './views/login.html';
   } else if (req.url.match(/\?username=.*/)) {
-    if(req.cookies.user != undefined) {
-      if (req.cookies.user.username != req.url.substr(11))
-      return res.redirect(('?username=' + req.cookies.user.username));
-    } else {
+    if(req.cookies.user == undefined) {
       return res.redirect('/');
     }
     file = './views/details.html';
@@ -32,14 +31,14 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var user = {
     username: req.body.username,
-    passwd: req.body.passwd
+    passwd: encrypt.md5(req.body.passwd)
   };
   db.users.find(user).then(data =>  {
     if (data == "") {
       res.end("错误的用户名或者密码");
     } else { 
       res.cookie("user", {username: req.body.username},
-                 {maxAge: 600000 , httpOnly: false});
+                 {maxAge: 1800000 , httpOnly: false});
       res.end("登录成功");
     }
   });
